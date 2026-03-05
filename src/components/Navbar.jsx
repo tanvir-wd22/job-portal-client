@@ -1,8 +1,30 @@
+import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import Swal from 'sweetalert2';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+
+  const handleLogoutBtn = () => {
+    logoutUser()
+      .then(() => {
+        Swal.fire('log out successfully');
+      })
+      .catch(() => {
+        Swal.fire('log out failed');
+      });
+  };
+  
   const links = (
     <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
@@ -37,18 +59,35 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link className="btn btn-ghost text-xl">Job Portal</Link>
+          <div className="flex gap-1 items-center">
+            <img src={logo} className="w-8" />
+            <span className="btn btn-ghost text-xl">Job Portal</span>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end hidden lg:flex gap-2">
-          <Link to="/login" className="btn btn-sm">
-            Login
-          </Link>
-          <Link to="/register" className="btn btn-sm">
-            Register
-          </Link>
+          {user ? (
+            <>
+              <span>{user?.displayName}</span>
+              <button
+                onClick={handleLogoutBtn}
+                className="btn btn-xs btn-error"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn btn-xs">
+                Login
+              </Link>
+              <Link to="/register" className="btn btn-xs">
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
