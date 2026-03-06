@@ -4,12 +4,19 @@ import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import SocialLogin from '../components/SocialLogin';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const { loginUser } = useContext(AuthContext);
+  // 1st step
+  const location = useLocation();
+  // 2nd step
+  const navigate = useNavigate();
+  // 3rd step
+  const from = location?.state || '/';
+
   const handleLoginForm = (e) => {
     e.preventDefault();
-
     const email = e.target.email.value;
     const password = e.target.password.value;
     loginUser(email, password)
@@ -18,6 +25,8 @@ const LoginPage = () => {
         Swal.fire(
           `${result?.user?.displayName || 'user'} has login successfully`
         );
+        // 4th step
+        navigate(from);
       })
       .catch((error) => {
         // console.log(error.message);
