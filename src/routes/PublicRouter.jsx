@@ -4,6 +4,7 @@ import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import JobCardDetails from '../components/JobCardDetails';
 
 const PublicRouter = createBrowserRouter([
   {
@@ -14,6 +15,12 @@ const PublicRouter = createBrowserRouter([
       {
         index: true,
         element: <HomePage></HomePage>,
+      },
+      {
+        path: '/jobs/:id',
+        element: <JobCardDetails></JobCardDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/jobs/${params.id}`),
       },
       {
         path: '/login',
