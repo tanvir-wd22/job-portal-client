@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const JobCardDetails = () => {
   const loadedDetailsData = useLoaderData();
@@ -32,11 +32,16 @@ const JobCardDetails = () => {
           <div className="badge badge-xs  badge-outline">{requirements[2]}</div>
           <div className="badge badge-xs  badge-outline">{requirements[3]}</div>
         </div>
-        <div className="">
+        <div>
           <span>Salary : </span>
           <span>{salaryRange.min} - </span>
           <span>{salaryRange.max} </span>
           <span>{salaryRange.currency}</span>
+        </div>
+        <div className="flex justify-center items-center">
+          <Link to={`/jobApply/${_id}`} className="btn btn-warning">
+            Apply For This Position
+          </Link>
         </div>
       </div>
     </div>
