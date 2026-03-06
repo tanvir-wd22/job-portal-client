@@ -2,10 +2,14 @@ import Lottie from 'lottie-react';
 import registerAnimation from '../assets/register.json';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
+import SocialLogin from '../components/SocialLogin';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const { registerUser } = useContext(AuthContext);
-  
+  const navigate = useNavigate();
+
   const handleRegisterForm = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -16,10 +20,15 @@ const RegisterPage = () => {
 
     registerUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
+        Swal.fire(
+          `${result?.user?.displayName || 'User'} registered in successfully`
+        );
+        navigate('/');
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
+        Swal.fire(error.message);
       });
   };
   return (
@@ -63,6 +72,7 @@ const RegisterPage = () => {
                 <button className="btn btn-neutral mt-4">Register</button>
               </fieldset>
             </form>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

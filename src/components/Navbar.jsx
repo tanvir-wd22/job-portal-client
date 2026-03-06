@@ -10,7 +10,7 @@ const Navbar = () => {
   const handleLogoutBtn = () => {
     logoutUser()
       .then(() => {
-        Swal.fire('log out successfully');
+        Swal.fire('log out done');
       })
       .catch(() => {
         Swal.fire('log out failed');
@@ -70,7 +70,7 @@ const Navbar = () => {
         <div className="navbar-end hidden lg:flex gap-2">
           {user ? (
             <>
-              <span>{user?.displayName}</span>
+              <span>{user?.displayName || "Logged User"}</span>
               <button
                 onClick={handleLogoutBtn}
                 className="btn btn-xs btn-error"

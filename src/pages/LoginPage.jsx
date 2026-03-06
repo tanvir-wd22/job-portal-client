@@ -2,6 +2,8 @@ import Lottie from 'lottie-react';
 import loginAnimation from '../assets/login.json';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
+import SocialLogin from '../components/SocialLogin';
+import Swal from 'sweetalert2';
 
 const LoginPage = () => {
   const { loginUser } = useContext(AuthContext);
@@ -12,10 +14,14 @@ const LoginPage = () => {
     const password = e.target.password.value;
     loginUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
+        Swal.fire(
+          `${result?.user?.displayName || 'user'} has login successfully`
+        );
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
+        Swal.fire(error.message);
       });
   };
   return (
@@ -45,6 +51,7 @@ const LoginPage = () => {
                 <button className="btn btn-neutral mt-4">Login</button>
               </fieldset>
             </form>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
