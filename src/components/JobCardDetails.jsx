@@ -2,7 +2,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const JobCardDetails = () => {
   const loadedDetailsData = useLoaderData();
-  //   console.log(loadedDetailsData);
+    console.log(loadedDetailsData);
   const {
     _id,
     company,
