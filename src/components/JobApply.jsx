@@ -1,12 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 
 const JobApply = () => {
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
   const { id } = useParams();
   //   console.log(id);
+  const navigate = useNavigate();
 
   const submitJobApplication = (e) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ const JobApply = () => {
       resume: resume,
     };
 
-    fetch(`http://localhost:5000/applications`, {
+    fetch(`http://localhost:5000/apps`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,6 +35,7 @@ const JobApply = () => {
         // console.log(data);
         if (data.insertedId) {
           Swal.fire('applications data posted to server');
+          navigate('/myApplications');
         }
       });
   };
@@ -74,7 +76,7 @@ const JobApply = () => {
                   placeholder="Resume Url"
                 />
                 <button className="btn btn-neutral mt-4">
-                  Submit Job Data
+                  Submit Application
                 </button>
               </fieldset>
             </form>

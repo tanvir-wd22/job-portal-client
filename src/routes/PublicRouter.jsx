@@ -7,6 +7,7 @@ import RegisterPage from '../pages/RegisterPage';
 import JobCardDetails from '../components/JobCardDetails';
 import PrivateRouter from './PrivateRouter';
 import JobApply from '../components/JobApply';
+import MyApplications from '../components/MyApplications';
 
 const PublicRouter = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ const PublicRouter = createBrowserRouter([
         element: (
           <PrivateRouter>
             <JobApply></JobApply>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: '/myApplications',
+        element: (
+          <PrivateRouter>
+            <MyApplications></MyApplications>
           </PrivateRouter>
         ),
       },

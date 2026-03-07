@@ -16,14 +16,14 @@ const Navbar = () => {
         Swal.fire('log out failed');
       });
   };
-  
+
   const links = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/myApplications">My Applications</NavLink>
       </li>
       <li>
         <NavLink to="/">Home</NavLink>
@@ -70,7 +70,7 @@ const Navbar = () => {
         <div className="navbar-end hidden lg:flex gap-2">
           {user ? (
             <>
-              <span>{user?.displayName || "Logged User"}</span>
+              <span>{user?.displayName || 'Logged User'}</span>
               <button
                 onClick={handleLogoutBtn}
                 className="btn btn-xs btn-error"
