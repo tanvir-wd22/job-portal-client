@@ -1,4 +1,9 @@
+import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
+
 const AdminPostedJobsPage = () => {
+  const { user } = useAuth();
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -11,12 +16,28 @@ const AdminPostedJobsPage = () => {
     newData.salaryRange = { min: min, max: max, currency: currency };
     newData.responsibilities = newData.responsibilities.split('\n');
     newData.requirements = newData.requirements.split('\n');
-    console.log(newData);
+    // console.log(newData);
+
+    // ========== send form data to server ==============
+    fetch(`http://localhost:5000/jobs`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.insertedId) {
+          Swal.fire('admin job posted successfully');
+        }
+      });
   };
 
   return (
     <div className="flex justify-center items-center">
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <div className="card bg-base-300 w-full max-w-sm shrink-0">
         <form onSubmit={handleFormSubmit} className="card-body">
           <fieldset className="fieldset">
             {/* title field */}
@@ -114,6 +135,7 @@ const AdminPostedJobsPage = () => {
             {/* hr name field */}
             <label className="label">HR Name</label>
             <input
+              defaultValue={user?.name}
               name="hr_name"
               type="text"
               className="input"
@@ -122,6 +144,7 @@ const AdminPostedJobsPage = () => {
             {/* hr email field */}
             <label className="label">HR Email</label>
             <input
+              defaultValue={user?.email}
               name="hr_email"
               type="email"
               className="input"
