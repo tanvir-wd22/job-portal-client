@@ -35,7 +35,7 @@ const JobApply = () => {
         // console.log(data);
         if (data.insertedId) {
           Swal.fire('applications data posted to server');
-          navigate('/myApplications');
+          navigate('/usersApplications');
         }
       });
   };

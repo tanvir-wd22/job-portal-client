@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import useAuth from '../hooks/useAuth';
-import ApplicationsTable from './ApplicationsTable';
+import UsersApplicationsTable from '../components/UsersApplicationsTable';
 
-const MyApplications = () => {
+const UsersApplicationsPage = () => {
   const { user } = useAuth();
   const [appsInfo, setAppsInfo] = useState([]);
 
@@ -20,14 +20,14 @@ const MyApplications = () => {
       </h1>
       <div>
         {appsInfo.map((appItem) => (
-          <ApplicationsTable
+          <UsersApplicationsTable
             appItem={appItem}
             key={appItem._id}
-          ></ApplicationsTable>
+          ></UsersApplicationsTable>
         ))}
       </div>
     </div>
   );
 };
 
-export default MyApplications;
+export default UsersApplicationsPage;

@@ -1,4 +1,4 @@
-const ApplicationsTable = ({ appItem }) => {
+const UsersApplicationsTable = ({ appItem }) => {
 //   console.log(appItem);
   const { company_logo, title, location, company,jobType } = appItem;
   return (
@@ -53,4 +53,4 @@ const ApplicationsTable = ({ appItem }) => {
   );
 };
 
-export default ApplicationsTable;
+export default UsersApplicationsTable;
