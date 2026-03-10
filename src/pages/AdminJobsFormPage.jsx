@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 
-const AdminPostedJobsPage = () => {
+const AdminJobsFormPage = () => {
   const { user } = useAuth();
 
   const handleFormSubmit = (e) => {
@@ -183,4 +183,4 @@ const AdminPostedJobsPage = () => {
   );
 };
 
-export default AdminPostedJobsPage;
+export default AdminJobsFormPage;

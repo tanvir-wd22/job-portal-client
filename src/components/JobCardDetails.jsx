@@ -2,7 +2,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const JobCardDetails = () => {
   const loadedDetailsData = useLoaderData();
-    console.log(loadedDetailsData);
+  console.log(loadedDetailsData);
   const {
     _id,
     company,
@@ -12,6 +12,7 @@ const JobCardDetails = () => {
     title,
     jobType,
     requirements,
+    responsibilities,
     salaryRange,
   } = loadedDetailsData;
 
@@ -24,13 +25,21 @@ const JobCardDetails = () => {
       </div>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
+        <div className="card-actions justify-between">
+          {requirements.map((element, index) => (
+            <div key={index} className="badge badge-outline">
+              {element}
+            </div>
+          ))}
+        </div>
         <p>{jobType}</p>
         <p>{description}</p>
         <div className="card-actions justify-between">
-          <div className="badge badge-xs badge-outline">{requirements[0]}</div>
-          <div className="badge badge-xs  badge-outline">{requirements[1]}</div>
-          <div className="badge badge-xs  badge-outline">{requirements[2]}</div>
-          <div className="badge badge-xs  badge-outline">{requirements[3]}</div>
+          {responsibilities.map((element, index) => (
+            <div key={index} className="badge badge-dash">
+              {element}
+            </div>
+          ))}
         </div>
         <div>
           <span>Salary : </span>
